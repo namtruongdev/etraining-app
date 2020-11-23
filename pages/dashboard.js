@@ -1,19 +1,20 @@
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
-import { notification } from 'antd';
 import { getData } from '../utils/getData';
 import LayoutLetter from '../components/layoutLetter';
+import { notification } from 'antd';
 
-const Dashboard = ({ code, message }) => {
+const Dashboard = ({ code, messange }) => {
+  console.log('dashboard render lai');
   const router = useRouter();
 
   useEffect(() => {
     router.prefetch('/');
     if (code === 401) {
+      router.replace('/login');
       notification['error']({
-        message: message,
+        message: messange,
       });
-      router.replace('/');
     }
   }, []);
   return (
