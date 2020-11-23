@@ -11,7 +11,7 @@ const Home = ({ name }) => (
 );
 
 export const getServerSideProps = async (ctx) => {
-  const data = await getData('http://localhost:3000/api/auth/signin', ctx);
+  const data = await getData(`${process.env.URL}api/auth/signin`, ctx);
   return {
     props: data,
   };
