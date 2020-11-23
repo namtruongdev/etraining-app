@@ -1,3 +1,5 @@
+import 'antd/dist/antd.css';
+
 const MyApp = ({ Component, pageProps }) => (
   <>
     <Component {...pageProps} />
@@ -16,6 +18,10 @@ const MyApp = ({ Component, pageProps }) => (
 
         html {
           font-size: 62.5%;
+        }
+
+        body {
+          font-size: 1.6rem;
         }
       `}
     </style>
