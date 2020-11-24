@@ -19,10 +19,10 @@ const { Title } = Typography;
 
 const Login = ({ code }) => {
   const router = useRouter();
-  if (code === 200) router.replace('/');
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     router.prefetch('/dashboard');
+    if (code === 200) router.replace('/');
   }, []);
 
   const onFinish = async (values) => {
