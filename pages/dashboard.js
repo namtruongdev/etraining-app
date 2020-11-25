@@ -20,18 +20,22 @@ const Dashboard = ({ code, messange }) => {
   return (
     <LayoutLetter>
       <div>
-        <h1>Day la trang admin</h1>
-        <h1>Day la trang admin</h1>
-        <h1>Day la trang admin</h1>
-        <h1>Day la trang admin</h1>
-        <h1>Day la trang admin</h1>
-        <h1>Day la trang admin</h1>
-        <h1>Day la trang admin</h1>
-        <h1>Day la trang admin</h1>
-        <h1>Day la trang admin</h1>
-        <h1>Day la trang admin</h1>
-        <h1>Day la trang admin</h1>
-        <h1>Day la trang admin</h1>
+        <h1>Không có gì đâu mà vào.</h1>
+        <h1>Không có gì đâu mà vào.</h1>
+        <h1>Không có gì đâu mà vào.</h1>
+        <h1>Không có gì đâu mà vào.</h1>
+        <h1>Không có gì đâu mà vào.</h1>
+        <h1>Không có gì đâu mà vào.</h1>
+        <h1>Không có gì đâu mà vào.</h1>
+        <h1>Không có gì đâu mà vào.</h1>
+        <h1>Không có gì đâu mà vào.</h1>
+        <h1>Không có gì đâu mà vào.</h1>
+        <h1>Không có gì đâu mà vào.</h1>
+        <h1>Không có gì đâu mà vào.</h1>
+        <h1>Không có gì đâu mà vào.</h1>
+        <h1>Không có gì đâu mà vào.</h1>
+        <h1>Không có gì đâu mà vào.</h1>
+        <h1>Không có gì đâu mà vào.</h1>
       </div>
     </LayoutLetter>
   );
