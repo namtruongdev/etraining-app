@@ -5,8 +5,10 @@ const signup = async (req, res) => {
   const { db } = await connect();
 
   if (req.method === 'POST') {
+    const username = req.body.username.toLowerCase();
+    const email = req.body.email.toLowerCase();
     const checkUser = await db.collection('users').findOne({
-      $or: [{ username: req.body.username }, { email: req.body.email }],
+      $or: [{ username: username }, { email: email }],
     });
 
     if (checkUser === null) {
@@ -14,9 +16,9 @@ const signup = async (req, res) => {
 
       const response = await db.collection('users').insertOne({
         name: req.body.name,
-        username: req.body.username,
+        username: username,
         password: hashPassword,
-        email: req.body.email,
+        email: email,
       });
 
       if (response.result.ok === 1) {

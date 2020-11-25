@@ -25,6 +25,7 @@ import {
   ThunderboltOutlined,
   FormOutlined,
   ReadOutlined,
+  MenuOutlined,
   BellOutlined,
 } from '@ant-design/icons';
 import style from '../styles/index.module.css';
@@ -70,6 +71,7 @@ const Home = ({ name }) => {
             mode="horizontal"
             selectedKeys={['home']}
             theme="dark"
+            overflowedIndicator={<MenuOutlined />}
             className={`${className} ${style.menu}`}
           >
             <Menu.Item
@@ -98,15 +100,16 @@ const Home = ({ name }) => {
               <Menu.Item key="setting:8">Khó</Menu.Item>
             </SubMenu>
           </Menu>
-          <Button type="primary" shape="round" size="middle">
-            Học ngay
-          </Button>
+          <div className="learn-now">
+            <Button type="primary" shape="round" size="middle">
+              Học ngay
+            </Button>
+          </div>
         </nav>
         <div className="user__info">
           <BellOutlined
             style={{
-              fontSize: '25px',
-
+              fontSize: '20px',
               color: 'rgba(255, 255, 255, 1)',
               cursor: 'pointer',
             }}
@@ -212,6 +215,7 @@ const Home = ({ name }) => {
                 width={574.17079}
                 height={411.08457}
                 layout="responsive"
+                draggable="false"
               />
               <Title level={3} style={{ marginTop: '15px' }}>
                 Bạn toàn quyền quyết định
@@ -228,6 +232,7 @@ const Home = ({ name }) => {
                 width={574.17079}
                 height={411.08457}
                 layout="responsive"
+                draggable="false"
               />
               <Title level={3} style={{ marginTop: '15px' }}>
                 Sử dụng flashcard màu sắc
@@ -243,6 +248,7 @@ const Home = ({ name }) => {
                 width={574.17079}
                 height={411.08457}
                 layout="responsive"
+                draggable="false"
               />
               <Title level={3} style={{ marginTop: '15px' }}>
                 Hệ thống các bài học và lý thuyết đầy đủ
@@ -259,6 +265,7 @@ const Home = ({ name }) => {
                 width={574.17079}
                 height={411.08457}
                 layout="responsive"
+                draggable="false"
               />
               <Title level={3} style={{ marginTop: '15px' }}>
                 Thi đấu giữa các học viên
@@ -287,16 +294,25 @@ const Home = ({ name }) => {
                   <List.Item>
                     <List.Item.Meta
                       avatar={
-                        <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                        <Avatar
+                          draggable="false"
+                          src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                        />
                       }
-                      title={<a href="https://ant.design">{item.title}</a>}
+                      title={item.title}
                     />
                   </List.Item>
                 )}
               />
             </div>
             <div className="why-learn__content__item why-learn__content__item-2">
-              d
+              <Image
+                src="/images/why-learn-image.png"
+                width={313}
+                height={300}
+                layout="fixed"
+                draggable="false"
+              />
             </div>
           </div>
         </section>
@@ -385,15 +401,32 @@ const Home = ({ name }) => {
             margin: 15px;
           }
 
+          .why-learn__content__item-2 {
+            display: flex;
+            justify-content: flex-end;
+          }
+
           @media (max-width: 992px) {
             .why__content__item {
               flex: 0 0 45.5%;
+            }
+
+            .why-learn__content__item {
+              flex: 0 0 100%;
+            }
+
+            .why-learn__content__item-2 {
+              display: none;
             }
           }
 
           @media (max-width: 768px) {
             .why__content__item {
               flex: 0 0 100%;
+            }
+
+            .learn-now {
+              display: none;
             }
           }
         `}
