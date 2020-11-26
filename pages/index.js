@@ -9,7 +9,7 @@ import { getData } from '../utils/getData';
 
 const Home = ({ name }) => {
   return (
-    <LayoutWrapper name={name}>
+    <LayoutWrapper name={name} title="Trang chủ | ETraining">
       <Banner />
       <Slogan />
       <section className="divider">
@@ -30,6 +30,7 @@ const Home = ({ name }) => {
             padding-bottom: 30px;
             display: flex;
             justify-content: center;
+            clip-path: polygon(0 0, 100% 0%, 100% 100%, 0 70%);
           }
         `}
       </style>

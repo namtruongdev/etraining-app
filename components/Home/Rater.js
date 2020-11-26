@@ -121,6 +121,18 @@ const Rater = () => {
           .avatar {
             flex: 0 0 150px;
           }
+
+          @media (max-width: 576px) {
+            .people {
+              flex-direction: column;
+            }
+            .avatar {
+              text-align: center;
+            }
+            .comment {
+              margin: 20px 0 0 0;
+            }
+          }
         `}
       </style>
     </section>

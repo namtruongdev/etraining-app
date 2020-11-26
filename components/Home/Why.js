@@ -90,6 +90,7 @@ const Why = () => {
             justify-content: center;
             flex-direction: column;
             align-items: center;
+            clip-path: polygon(0 0, 100% 0%, 100% 95%, 0 100%);
           }
 
           .title {

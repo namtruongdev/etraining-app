@@ -22,6 +22,7 @@ const MyApp = ({ Component, pageProps }) => (
 
         body {
           font-size: 1.6rem;
+          scroll-behavior: smooth;
         }
       `}
     </style>

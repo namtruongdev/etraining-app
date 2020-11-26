@@ -43,10 +43,24 @@ const Banner = () => {
           />
         </div>
       </Carousel>
+      <div className="banner--fadeBottom"></div>
       <style jsx>
         {`
           .slide__image {
             height: 600px;
+            position: relative;
+          }
+
+          .banner--fadeBottom {
+            height: 7.4rem;
+            background-image: linear-gradient(
+              180deg,
+              transparent,
+              rgba(163, 163, 163, 0.61),
+              #ededed
+            );
+            margin-top: -7.4rem;
+            z-index: 11;
             position: relative;
           }
         `}
