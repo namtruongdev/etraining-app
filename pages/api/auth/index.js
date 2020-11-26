@@ -1,4 +1,4 @@
-import { auth } from '../../../../utils/auth';
+import { auth } from '../../../utils/auth';
 
 export default auth(async (req, res, data) => {
   res.json({

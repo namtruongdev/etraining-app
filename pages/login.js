@@ -130,7 +130,7 @@ const Login = ({ code }) => {
 };
 
 export const getServerSideProps = async (ctx) => {
-  const data = await getData(`${process.env.URL}api/auth/signin`, ctx);
+  const data = await getData(`${process.env.URL}api/auth`, ctx);
   return {
     props: data,
   };
