@@ -48,7 +48,6 @@ const LayoutWrapper = ({ children, title, name, username }) => {
   const router = useRouter();
   const [bgHeader, setBgHeader] = useState('rgba(0, 21, 41, 0.3)');
   useEffect(() => {
-    console.log('haha');
     const changeBgHeader = () => {
       if (window.scrollY >= 500) setBgHeader('rgba(0, 21, 41, 1)');
       else setBgHeader('rgba(0, 21, 41, 0.3)');
@@ -70,7 +69,7 @@ const LayoutWrapper = ({ children, title, name, username }) => {
 
   const menu = (
     <Menu theme="dark" onClick={handleMenuClick}>
-      <Menu.Item key="1">
+      <Menu.Item key="profile">
         <div
           style={{ display: 'flex', alignItems: 'center' }}
           className="profile"
@@ -102,7 +101,7 @@ const LayoutWrapper = ({ children, title, name, username }) => {
           margin: '4px 12px',
         }}
       />
-      <Menu.Item key="1" icon={<UserOutlined />}>
+      <Menu.Item key="feed" icon={<UserOutlined />}>
         <Link href="/dashboard">Bảng tin</Link>
       </Menu.Item>
       <Menu.Item key="signout" icon={<LogoutOutlined />}>
