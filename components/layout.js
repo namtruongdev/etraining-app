@@ -151,6 +151,7 @@ const LayoutWrapper = ({ children, title, name }) => {
             background: '#10182F',
             color: '#A2AED2',
             padding: '24px 15px',
+            clipPath: 'polygon(0 0, 100% 5%, 100% 100%, 0 100%)',
           }}
         >
           <div className="container">

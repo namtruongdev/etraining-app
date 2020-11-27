@@ -83,6 +83,7 @@ const WhyLearn = () => {
             justify-content: center;
             align-items: center;
             padding: 15px;
+            clip-path: polygon(0 0, 100% 0%, 100% 100%, 0 95%);
           }
 
           .why-learn__content {
