@@ -45,8 +45,6 @@ const { className, styles } = css.resolve`
 `;
 
 const LayoutWrapper = ({ children, title, name, username }) => {
-  console.log(username);
-
   const router = useRouter();
   const [bgHeader, setBgHeader] = useState('rgba(0, 21, 41, 0.3)');
 

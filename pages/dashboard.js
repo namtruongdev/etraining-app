@@ -4,7 +4,7 @@ import { getData } from '../utils/getData';
 import { notification } from 'antd';
 import Layout from '../components/layout';
 
-const Dashboard = ({ code, messange, name }) => {
+const Dashboard = ({ code, messange, name, username }) => {
   console.log('dashboard render lai');
   const router = useRouter();
 
@@ -19,7 +19,7 @@ const Dashboard = ({ code, messange, name }) => {
   }, []);
 
   return (
-    <Layout name={name}>
+    <Layout name={name} username={username}>
       <div>
         <h1>Không có gì đâu mà vào.</h1>
         <h1>Không có gì đâu mà vào.</h1>
