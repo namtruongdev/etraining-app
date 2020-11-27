@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { getData } from '../utils/getData';
-import LayoutLetter from '../components/layoutLetter';
 import { notification } from 'antd';
 import Layout from '../components/layout';
 

@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback, memo, useRef } from 'react';
 import {
   Layout,
   Menu,
@@ -45,8 +45,11 @@ const { className, styles } = css.resolve`
 `;
 
 const LayoutWrapper = ({ children, title, name, username }) => {
+  console.log(username);
+
   const router = useRouter();
   const [bgHeader, setBgHeader] = useState('rgba(0, 21, 41, 0.3)');
+
   useEffect(() => {
     const changeBgHeader = () => {
       if (window.scrollY >= 500) setBgHeader('rgba(0, 21, 41, 1)');
@@ -56,16 +59,16 @@ const LayoutWrapper = ({ children, title, name, username }) => {
     return () => window.removeEventListener('scroll', changeBgHeader);
   }, []);
 
-  const handleMenuClick = async (e) => {
+  useEffect(() => {
+    router.prefetch(`/${username}`);
+  }, []);
+
+  const handleMenuClick = useCallback(async (e) => {
     if (e.key === 'signout') {
       const res = await fetch('/api/signout');
-      if (res.ok) {
-        router.push('/');
-      }
-    } else if (e.key === 'profile') {
-      router.push(`${username}`);
-    }
-  };
+      if (res.ok) router.push('/');
+    } else if (e.key === 'profile') router.push(`/${username}`);
+  }, []);
 
   const menu = (
     <Menu theme="dark" onClick={handleMenuClick}>
@@ -386,4 +389,4 @@ const LayoutWrapper = ({ children, title, name, username }) => {
   );
 };
 
-export default LayoutWrapper;
+export default memo(LayoutWrapper);

@@ -6,5 +6,6 @@ export default auth(async (req, res, data) => {
     messange: 'Đăng nhập thành công!',
     id: data.sub,
     name: data.name,
+    username: data.username,
   });
 });
