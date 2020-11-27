@@ -1,7 +1,16 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { Layout, Menu, Button, Avatar, Select, Typography } from 'antd';
+import {
+  Layout,
+  Menu,
+  Button,
+  Avatar,
+  Select,
+  Typography,
+  Dropdown,
+} from 'antd';
 import {
   ThunderboltOutlined,
   FormOutlined,
@@ -13,6 +22,8 @@ import {
   FacebookOutlined,
   HeartFilled,
   DingdingOutlined,
+  UserOutlined,
+  LogoutOutlined,
 } from '@ant-design/icons';
 import css from 'styled-jsx/css';
 
@@ -21,15 +32,11 @@ import style from '../styles/index.module.css';
 const { Header, Footer, Content } = Layout;
 const { SubMenu } = Menu;
 const { Option } = Select;
-const { Title } = Typography;
+const { Title, Text } = Typography;
 
 const { className, styles } = css.resolve`
   .ant-menu-dark.ant-menu-horizontal {
     background: transparent;
-  }
-
-  .ant-menu-item-active:hover {
-    background: red;
   }
 
   .ant-menu.ant-menu-dark {
@@ -37,15 +44,71 @@ const { className, styles } = css.resolve`
   }
 `;
 
-const LayoutWrapper = ({ children, title, name }) => {
+const LayoutWrapper = ({ children, title, name, username }) => {
+  const router = useRouter();
   const [bgHeader, setBgHeader] = useState('rgba(0, 21, 41, 0.3)');
   useEffect(() => {
-    window.addEventListener('scroll', () => {
+    const changeBgHeader = () => {
       if (window.scrollY >= 500) setBgHeader('rgba(0, 21, 41, 1)');
       else setBgHeader('rgba(0, 21, 41, 0.3)');
-      return () => window.removeEventListener('scroll');
-    });
+    };
+    window.addEventListener('scroll', changeBgHeader);
+    return () => window.removeEventListener('scroll', changeBgHeader);
   }, []);
+
+  const handleMenuClick = async (e) => {
+    if (e.key === 'signout') {
+      const res = await fetch('/api/signout');
+      if (res.ok) {
+        router.push('/');
+      }
+    } else if (e.key === 'profile') {
+      router.push(`${username}`);
+    }
+  };
+
+  const menu = (
+    <Menu theme="dark" onClick={handleMenuClick}>
+      <Menu.Item key="profile">
+        <div
+          style={{ display: 'flex', alignItems: 'center' }}
+          className="profile"
+        >
+          <Avatar
+            style={{ marginRight: '15px' }}
+            size={60}
+            src="https://i.pravatar.cc/300"
+          />
+          <div>
+            <Title
+              level={4}
+              style={{
+                color: 'rgba(255, 255, 255, 0.65)',
+                marginBottom: '5px',
+              }}
+            >
+              {name}
+            </Title>
+            <Text style={{ color: 'rgba(255, 255, 255, 0.65)' }}>
+              Xem trang cá nhân của bạn
+            </Text>
+          </div>
+        </div>
+      </Menu.Item>
+      <Menu.Divider
+        style={{
+          backgroundColor: 'rgba(255,255,255,0.45)',
+          margin: '4px 12px',
+        }}
+      />
+      <Menu.Item key="feed" icon={<UserOutlined />}>
+        <Link href="/dashboard">Bảng tin</Link>
+      </Menu.Item>
+      <Menu.Item key="signout" icon={<LogoutOutlined />}>
+        Đăng xuất
+      </Menu.Item>
+    </Menu>
+  );
 
   return (
     <>
@@ -115,17 +178,24 @@ const LayoutWrapper = ({ children, title, name }) => {
                 }}
               />
               {name ? (
-                <Avatar
-                  style={{
-                    background: 'url(https://i.pravatar.cc/300)',
-                    backgroundSize: 'cover',
-                    verticalAlign: 'middle',
-                    cursor: 'pointer',
-                    marginLeft: '15px',
-                  }}
-                  size="large"
-                  gap={1}
-                />
+                <Dropdown
+                  overlay={menu}
+                  placement="bottomRight"
+                  trigger="click"
+                  overlayStyle={{ position: 'fixed' }}
+                >
+                  <Avatar
+                    style={{
+                      background: 'url(https://i.pravatar.cc/300)',
+                      backgroundSize: 'cover',
+                      verticalAlign: 'middle',
+                      cursor: 'pointer',
+                      marginLeft: '15px',
+                    }}
+                    size="large"
+                    gap={1}
+                  />
+                </Dropdown>
               ) : (
                 <Link href="/login" passHref>
                   <a

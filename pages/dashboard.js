@@ -3,8 +3,9 @@ import React, { useEffect } from 'react';
 import { getData } from '../utils/getData';
 import LayoutLetter from '../components/layoutLetter';
 import { notification } from 'antd';
+import Layout from '../components/layout';
 
-const Dashboard = ({ code, messange }) => {
+const Dashboard = ({ code, messange, name }) => {
   console.log('dashboard render lai');
   const router = useRouter();
 
@@ -17,8 +18,9 @@ const Dashboard = ({ code, messange }) => {
       });
     }
   }, []);
+
   return (
-    <LayoutLetter>
+    <Layout name={name}>
       <div>
         <h1>Không có gì đâu mà vào.</h1>
         <h1>Không có gì đâu mà vào.</h1>
@@ -37,7 +39,7 @@ const Dashboard = ({ code, messange }) => {
         <h1>Không có gì đâu mà vào.</h1>
         <h1>Không có gì đâu mà vào.</h1>
       </div>
-    </LayoutLetter>
+    </Layout>
   );
 };
 

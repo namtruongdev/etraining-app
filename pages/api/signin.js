@@ -13,7 +13,11 @@ const signin = async (req, res) => {
     if (user !== null) {
       const match = await compare(req.body.password, user.password);
       if (match) {
-        const claims = { sub: user._id, name: user.name };
+        const claims = {
+          sub: user._id,
+          name: user.name,
+          username: user.username,
+        };
         const jwt = sign(claims, process.env.SECRET, { expiresIn: '1h' });
         res.setHeader(
           'Set-Cookie',

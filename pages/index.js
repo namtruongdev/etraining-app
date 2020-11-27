@@ -7,9 +7,13 @@ import WhyLearn from '../components/Home/WhyLearn';
 import Rater from '../components/Home/Rater';
 import { getData } from '../utils/getData';
 
-const Home = ({ name }) => {
+const Home = ({ name, username }) => {
   return (
-    <LayoutWrapper name={name} title="Trang chủ | ETraining">
+    <LayoutWrapper
+      name={name}
+      username={username}
+      title="Trang chủ | ETraining"
+    >
       <Banner />
       <Slogan />
       <section className="divider">
