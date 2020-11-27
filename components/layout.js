@@ -69,7 +69,7 @@ const LayoutWrapper = ({ children, title, name, username }) => {
 
   const menu = (
     <Menu theme="dark" onClick={handleMenuClick}>
-      <Menu.Item key="profile">
+      <Menu.Item key="1">
         <div
           style={{ display: 'flex', alignItems: 'center' }}
           className="profile"
@@ -101,7 +101,7 @@ const LayoutWrapper = ({ children, title, name, username }) => {
           margin: '4px 12px',
         }}
       />
-      <Menu.Item key="feed" icon={<UserOutlined />}>
+      <Menu.Item key="1" icon={<UserOutlined />}>
         <Link href="/dashboard">Bảng tin</Link>
       </Menu.Item>
       <Menu.Item key="signout" icon={<LogoutOutlined />}>
