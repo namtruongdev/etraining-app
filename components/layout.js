@@ -48,6 +48,7 @@ const LayoutWrapper = ({ children, title, name, username }) => {
   const router = useRouter();
   const [bgHeader, setBgHeader] = useState('rgba(0, 21, 41, 0.3)');
   useEffect(() => {
+    console.log('haha');
     const changeBgHeader = () => {
       if (window.scrollY >= 500) setBgHeader('rgba(0, 21, 41, 1)');
       else setBgHeader('rgba(0, 21, 41, 0.3)');
