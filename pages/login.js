@@ -45,6 +45,7 @@ const Login = () => {
         if (data) setLoading(false);
         notification['success']({
           message: data.message,
+          duration: 1,
         });
         router.push('/dashboard');
       } else {

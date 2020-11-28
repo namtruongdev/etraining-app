@@ -31,7 +31,7 @@ const LayoutWrapper = ({ children, title, name, username }) => {
         <title>{title}</title>
       </Head>
       <Layout>
-        <Header bgHeader={bgHeader} name={name} />
+        <Header bgHeader={bgHeader} name={name} username={username} />
         <Content>{children}</Content>
         <Footer />
       </Layout>

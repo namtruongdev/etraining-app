@@ -85,7 +85,7 @@ const HeaderPrimary = ({ name, bgHeader, username }) => {
         </Menu.Item>
       </Menu>
     ),
-    []
+    [name, username]
   );
 
   return (
