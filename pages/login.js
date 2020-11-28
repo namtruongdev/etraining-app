@@ -39,9 +39,8 @@ const Login = () => {
       body: JSON.stringify(values),
     });
 
+    const data = await res.json();
     if (_isMounted) {
-      const data = await res.json();
-
       if (res.ok) {
         if (data) setLoading(false);
         notification['success']({
