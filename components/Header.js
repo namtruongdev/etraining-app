@@ -42,50 +42,47 @@ const HeaderPrimary = ({ name, bgHeader, username }) => {
     } else if (e.key === 'profile') router.push(`/${username}`);
   }, []);
 
-  const menu = useMemo(
-    () => (
-      <Menu theme="dark" onClick={handleMenuClick}>
-        <Menu.Item key="profile">
-          <div
-            style={{ display: 'flex', alignItems: 'center' }}
-            className="profile"
-          >
-            <Avatar
-              style={{ marginRight: '15px' }}
-              size={60}
-              src="https://i.pravatar.cc/300"
-            />
-            <div>
-              <Title
-                level={4}
-                style={{
-                  color: 'rgba(255, 255, 255, 0.65)',
-                  marginBottom: '5px',
-                }}
-              >
-                {name}
-              </Title>
-              <Text style={{ color: 'rgba(255, 255, 255, 0.65)' }}>
-                Xem trang cá nhân của bạn
-              </Text>
-            </div>
+  const menu = (
+    <Menu theme="dark" onClick={handleMenuClick}>
+      <Menu.Item key="profile">
+        <div
+          style={{ display: 'flex', alignItems: 'center' }}
+          className="profile"
+        >
+          <Avatar
+            style={{ marginRight: '15px' }}
+            size={60}
+            src="https://i.pravatar.cc/300"
+          />
+          <div>
+            <Title
+              level={4}
+              style={{
+                color: 'rgba(255, 255, 255, 0.65)',
+                marginBottom: '5px',
+              }}
+            >
+              {name}
+            </Title>
+            <Text style={{ color: 'rgba(255, 255, 255, 0.65)' }}>
+              Xem trang cá nhân của bạn
+            </Text>
           </div>
-        </Menu.Item>
-        <Menu.Divider
-          style={{
-            backgroundColor: 'rgba(255,255,255,0.45)',
-            margin: '4px 12px',
-          }}
-        />
-        <Menu.Item key="feed" icon={<UserOutlined />}>
-          <Link href="/dashboard">Bảng tin</Link>
-        </Menu.Item>
-        <Menu.Item key="signout" icon={<LogoutOutlined />}>
-          Đăng xuất
-        </Menu.Item>
-      </Menu>
-    ),
-    [name, username]
+        </div>
+      </Menu.Item>
+      <Menu.Divider
+        style={{
+          backgroundColor: 'rgba(255,255,255,0.45)',
+          margin: '4px 12px',
+        }}
+      />
+      <Menu.Item key="feed" icon={<UserOutlined />}>
+        <Link href="/dashboard">Bảng tin</Link>
+      </Menu.Item>
+      <Menu.Item key="signout" icon={<LogoutOutlined />}>
+        Đăng xuất
+      </Menu.Item>
+    </Menu>
   );
 
   return (
