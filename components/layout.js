@@ -39,4 +39,4 @@ const LayoutWrapper = ({ children, title, name, username }) => {
   );
 };
 
-export default memo(LayoutWrapper);
+export default LayoutWrapper;
