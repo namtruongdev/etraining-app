@@ -215,4 +215,4 @@ const HeaderPrimary = ({ name, bgHeader, username }) => {
   );
 };
 
-export default memo(HeaderPrimary);
+export default HeaderPrimary;
