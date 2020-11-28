@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { getData } from '../utils/getData';
+import React, { useEffect, useState, useContext } from 'react';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import {
   Typography,
@@ -12,21 +11,26 @@ import {
   Spin,
   notification,
 } from 'antd';
+
+import { AuthContext } from '../context/Auth';
 import LayoutLetter from '../components/layoutLetter';
-import styles from '../styles/login.module.css';
+import { useIsMounted } from '../hooks/index';
 
 const { Title } = Typography;
 
-const Login = ({ code }) => {
+const Login = () => {
+  const _isMounted = useIsMounted();
   const router = useRouter();
+  const { code } = useContext(AuthContext);
+  if (code === 200) router.replace('/');
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     router.prefetch('/dashboard');
-    if (code === 200) router.replace('/');
   }, []);
 
   const onFinish = async (values) => {
     setLoading(true);
+
     const res = await fetch('/api/signin', {
       method: 'POST',
       headers: {
@@ -35,19 +39,21 @@ const Login = ({ code }) => {
       body: JSON.stringify(values),
     });
 
-    const data = await res.json();
+    if (_isMounted) {
+      const data = await res.json();
 
-    if (res.ok) {
-      if (data) setLoading(false);
-      notification['success']({
-        message: data.message,
-      });
-      router.push('/dashboard');
-    } else {
-      if (data) setLoading(false);
-      notification['error']({
-        message: data.message,
-      });
+      if (res.ok) {
+        if (data) setLoading(false);
+        notification['success']({
+          message: data.message,
+        });
+        router.push('/dashboard');
+      } else {
+        if (data) setLoading(false);
+        notification['error']({
+          message: data.message,
+        });
+      }
     }
   };
 
@@ -59,7 +65,7 @@ const Login = ({ code }) => {
           <Form
             name="normal_login"
             size="large"
-            className={styles.form}
+            className=""
             initialValues={{ remember: false }}
             onFinish={onFinish}
           >
@@ -97,7 +103,7 @@ const Login = ({ code }) => {
                 <Checkbox>Nhớ mật khẩu</Checkbox>
               </Form.Item>
 
-              <a className={styles.forgot} href="">
+              <a className="forgot" href="">
                 Quên mật khẩu
               </a>
             </Form.Item>
@@ -106,7 +112,7 @@ const Login = ({ code }) => {
               <Button
                 type="primary"
                 htmlType="submit"
-                className={styles.button}
+                style={{ width: '100%' }}
               >
                 Đăng nhập
               </Button>
@@ -122,18 +128,15 @@ const Login = ({ code }) => {
               max-width: 416px;
               margin: 0 auto;
             }
+
+            .forgot {
+              float: right;
+            }
           `}
         </style>
       </LayoutLetter>
     </Spin>
   );
-};
-
-export const getServerSideProps = async (ctx) => {
-  const data = await getData(`${process.env.URL}api/auth`, ctx);
-  return {
-    props: data,
-  };
 };
 
 export default Login;

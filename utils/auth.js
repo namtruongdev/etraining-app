@@ -5,8 +5,8 @@ export const auth = (next) => async (req, res) => {
     if (!err && decoded) {
       return await next(req, res, decoded);
     }
-    res.status(401).json({
-      code: 401,
+    res.status(403).json({
+      code: 403,
       messange: 'Bạn chưa đăng nhập!',
     });
   });

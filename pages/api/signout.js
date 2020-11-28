@@ -8,5 +8,5 @@ export default async (req, res) => {
       path: '/',
     })
   );
-  return res.status(200).json({ code: 200, message: 'Đăng xuất thành công!' });
+  return res.status(200).json({ code: 403, message: 'Đăng xuất thành công!' });
 };

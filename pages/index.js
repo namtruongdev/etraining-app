@@ -1,13 +1,17 @@
 import Image from 'next/image';
+import { useContext } from 'react';
+
 import LayoutWrapper from '../components/layout';
 import Banner from '../components/Home/Banner';
 import Slogan from '../components/Home/Slogan';
 import Why from '../components/Home/Why';
 import WhyLearn from '../components/Home/WhyLearn';
 import Rater from '../components/Home/Rater';
-import { getData } from '../utils/getData';
+import { AuthContext } from '../context/Auth';
 
-const Home = ({ name, username }) => {
+const Home = () => {
+  const { name, username } = useContext(AuthContext);
+
   return (
     <LayoutWrapper
       name={name}
@@ -40,13 +44,6 @@ const Home = ({ name, username }) => {
       </style>
     </LayoutWrapper>
   );
-};
-
-export const getServerSideProps = async (ctx) => {
-  const data = await getData(`${process.env.URL}api/auth`, ctx);
-  return {
-    props: data,
-  };
 };
 
 export default Home;

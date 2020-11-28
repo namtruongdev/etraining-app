@@ -1,9 +1,9 @@
 import { auth } from '../../utils/auth';
 
 export default auth(async (req, res, data) => {
-  res.json({
+  res.stutus(200).json({
     code: 200,
-    messange: 'Đăng nhập thành công!',
+    messange: 'Bạn đã đăng nhập!',
     id: data.sub,
     name: data.name,
     username: data.username,
