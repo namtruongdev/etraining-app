@@ -35,12 +35,12 @@ const { className, styles } = css.resolve`
 const HeaderPrimary = ({ name, bgHeader, username }) => {
   const router = useRouter();
 
-  const handleMenuClick = useCallback(async (e) => {
+  const handleMenuClick = async (e) => {
     if (e.key === 'signout') {
       const res = await fetch('/api/signout');
       if (res.ok) router.replace('/');
     } else if (e.key === 'profile') router.push(`/${username}`);
-  }, []);
+  };
 
   const menu = (
     <Menu theme="dark" onClick={handleMenuClick}>
