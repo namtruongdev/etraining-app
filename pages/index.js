@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
 
 import Layout from '../components/layout';
 import Banner from '../components/Home/Banner';
@@ -7,22 +6,10 @@ import Slogan from '../components/Home/Slogan';
 import Why from '../components/Home/Why';
 import WhyLearn from '../components/Home/WhyLearn';
 import Rater from '../components/Home/Rater';
-import { useValidated } from '../hooks';
 
 const Home = () => {
-  const { data } = useValidated();
-  const [name, setName] = useState(null);
-  const [username, setUsername] = useState(null);
-
-  useEffect(() => {
-    if (data) {
-      setUsername(data?.username);
-      setName(data?.name);
-    }
-  }, [data]);
-
   return (
-    <Layout name={name} username={username} title="Trang chủ | ETraining">
+    <Layout title="Trang chủ | ETraining">
       <Banner />
       <Slogan />
       <section className="divider">
