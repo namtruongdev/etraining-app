@@ -36,7 +36,7 @@ const { className, styles } = css.resolve`
 
 const HeaderPrimary = ({ bgHeader }) => {
   const router = useRouter();
-  const { mutate, data } = useValidated();
+  const { mutate, data, loggedIn } = useValidated();
   const [name, setName] = useState(null);
   const [username, setUsername] = useState(null);
   const _isMounted = useIsMounted();
@@ -46,7 +46,7 @@ const HeaderPrimary = ({ bgHeader }) => {
       setName(data?.name);
       setUsername(data?.username);
     }
-  }, [data]);
+  }, [loggedIn]);
 
   useEffect(() => {
     router.prefetch(`/${username}`);
@@ -58,7 +58,7 @@ const HeaderPrimary = ({ bgHeader }) => {
       const res = await fetch('/api/signout');
       if (_isMounted) {
         if (res.ok) {
-          mutate(null);
+          mutate();
           router.replace('/');
         }
       }
