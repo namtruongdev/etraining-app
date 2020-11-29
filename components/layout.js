@@ -1,10 +1,10 @@
 import Head from 'next/head';
-
+import dynamic from 'next/dynamic';
 import React, { useEffect, useState, memo } from 'react';
 import { Layout } from 'antd';
 
-import Header from './Header';
-import Footer from './Footer';
+const Header = dynamic(() => import('./Header'));
+const Footer = dynamic(() => import('./Footer'));
 
 const { Content } = Layout;
 

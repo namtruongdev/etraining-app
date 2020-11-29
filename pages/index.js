@@ -1,11 +1,12 @@
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 
 import Layout from '../components/layout';
-import Banner from '../components/Home/Banner';
-import Slogan from '../components/Home/Slogan';
-import Why from '../components/Home/Why';
-import WhyLearn from '../components/Home/WhyLearn';
-import Rater from '../components/Home/Rater';
+const Banner = dynamic(() => import('../components/Home/Banner'));
+const Slogan = dynamic(() => import('../components/Home/Slogan'));
+const Why = dynamic(() => import('../components/Home/Why'));
+const WhyLearn = dynamic(() => import('../components/Home/WhyLearn'));
+const Rater = dynamic(() => import('../components/Home/Rater'));
 
 const Home = () => {
   return (
