@@ -36,13 +36,14 @@ const { className, styles } = css.resolve`
 
 const HeaderPrimary = ({ bgHeader }) => {
   const router = useRouter();
-  const { mutate, data } = useValidated();
+  const { mutate, data, loggedOut } = useValidated();
   const [name, setName] = useState(null);
   const [username, setUsername] = useState(null);
   const _isMounted = useIsMounted();
 
   useEffect(() => {
     console.log(data);
+    console.log(loggedOut);
     if (data) {
       setName(data?.name);
       setUsername(data?.username);
