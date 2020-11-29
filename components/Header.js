@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import React, { useMemo, useCallback, memo, useEffect, useState } from 'react';
 
 import { Layout, Button, Dropdown, Menu, Avatar, Typography } from 'antd';
+import cookie from 'js-cookie';
 import css from 'styled-jsx/css';
 
 import {
@@ -44,10 +45,10 @@ const HeaderPrimary = ({ bgHeader }) => {
   useEffect(() => {
     console.log(loggedOut);
     if (data) {
-      setName(data?.name);
-      setUsername(data?.username);
+      setName(data.name);
+      setUsername(data.username);
     }
-  }, [data]);
+  }, [data, loggedOut]);
 
   useEffect(() => {
     router.prefetch(`/${username}`);
@@ -56,11 +57,14 @@ const HeaderPrimary = ({ bgHeader }) => {
 
   const handleMenuClick = useCallback(async (e) => {
     if (e.key === 'signout') {
-      const res = await fetch('/api/signout');
-
-      if (res.ok) {
-        mutate('/');
-        router.replace('/');
+      const res = await fetch('/api/signout', {
+        method: 'POST',
+      });
+      if (_isMounted) {
+        if (res.ok) {
+          mutate(null);
+          router.replace('/');
+        }
       }
     }
   }, []);
