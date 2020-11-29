@@ -9,7 +9,7 @@ const Dashboard = () => {
   const { loggedOut, data } = useValidated();
   const [name, setName] = useState(null);
   const [username, setUsername] = useState(null);
-  console.log(loggedOut);
+
   useEffect(() => {
     if (loggedOut) {
       router.replace('/login');
