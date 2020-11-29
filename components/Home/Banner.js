@@ -13,6 +13,7 @@ const Banner = () => {
             objectFit="cover"
             objectPosition="center"
             draggable="false"
+            priority="true"
           />
         </div>
         <div className="slide__image">

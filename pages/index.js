@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
-
 import Layout from '../components/layout';
 const Banner = dynamic(() => import('../components/Home/Banner'));
 const Slogan = dynamic(() => import('../components/Home/Slogan'));
