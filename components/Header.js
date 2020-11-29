@@ -42,7 +42,6 @@ const HeaderPrimary = ({ bgHeader }) => {
   const _isMounted = useIsMounted();
 
   useEffect(() => {
-    console.log(data);
     console.log(loggedOut);
     if (data) {
       setName(data?.name);
@@ -55,17 +54,16 @@ const HeaderPrimary = ({ bgHeader }) => {
     router.prefetch('/');
   }, []);
 
-  const handleMenuClick = async (e) => {
+  const handleMenuClick = useCallback(async (e) => {
     if (e.key === 'signout') {
       const res = await fetch('/api/signout');
-      if (_isMounted) {
-        if (res.ok) {
-          mutate('/');
-          router.replace('/');
-        }
+
+      if (res.ok) {
+        mutate('/');
+        router.replace('/');
       }
     }
-  };
+  }, []);
 
   const menu = useMemo(
     () => (
