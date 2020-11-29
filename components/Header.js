@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useMemo, useCallback, memo } from 'react';
+import React, { useMemo, useCallback, memo, useEffect, useState } from 'react';
 
 import { Layout, Button, Dropdown, Menu, Avatar, Typography } from 'antd';
 import css from 'styled-jsx/css';
@@ -15,6 +15,8 @@ import {
   LogoutOutlined,
   DingdingOutlined,
 } from '@ant-design/icons';
+
+import { useIsMounted, useValidated } from '../hooks';
 
 const { Header } = Layout;
 const { SubMenu } = Menu;
@@ -32,57 +34,83 @@ const { className, styles } = css.resolve`
   }
 `;
 
-const HeaderPrimary = ({ name, bgHeader, username }) => {
+const HeaderPrimary = ({ bgHeader }) => {
   const router = useRouter();
+  const { mutate, data } = useValidated();
+  const [name, setName] = useState(null);
+  const [username, setUsername] = useState(null);
+  const _isMounted = useIsMounted();
 
-  const handleMenuClick = async (e) => {
+  useEffect(() => {
+    if (data) {
+      setName(data?.name);
+      setUsername(data?.username);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    router.prefetch(`/${username}`);
+    router.prefetch('/');
+  }, []);
+
+  const handleMenuClick = useCallback(async (e) => {
     if (e.key === 'signout') {
       const res = await fetch('/api/signout');
-      if (res.ok) router.replace('/');
-    } else if (e.key === 'profile') router.push(`/${username}`);
-  };
+      if (_isMounted) {
+        if (res.ok) {
+          mutate(null);
+          router.replace('/');
+        }
+      }
+    }
+  }, []);
 
-  const menu = (
-    <Menu theme="dark" onClick={handleMenuClick}>
-      <Menu.Item key="profile">
-        <div
-          style={{ display: 'flex', alignItems: 'center' }}
-          className="profile"
-        >
-          <Avatar
-            style={{ marginRight: '15px' }}
-            size={60}
-            src="https://i.pravatar.cc/300"
-          />
-          <div>
-            <Title
-              level={4}
-              style={{
-                color: 'rgba(255, 255, 255, 0.65)',
-                marginBottom: '5px',
-              }}
+  const menu = useMemo(
+    () => (
+      <Menu theme="dark" onClick={handleMenuClick}>
+        <Menu.Item key="profile">
+          <Link href={`/${username}`}>
+            <div
+              style={{ display: 'flex', alignItems: 'center' }}
+              className="profile"
             >
-              {name}
-            </Title>
-            <Text style={{ color: 'rgba(255, 255, 255, 0.65)' }}>
-              Xem trang cá nhân của bạn
-            </Text>
-          </div>
-        </div>
-      </Menu.Item>
-      <Menu.Divider
-        style={{
-          backgroundColor: 'rgba(255,255,255,0.45)',
-          margin: '4px 12px',
-        }}
-      />
-      <Menu.Item key="feed" icon={<UserOutlined />}>
-        <Link href="/dashboard">Bảng tin</Link>
-      </Menu.Item>
-      <Menu.Item key="signout" icon={<LogoutOutlined />}>
-        Đăng xuất
-      </Menu.Item>
-    </Menu>
+              <Avatar
+                style={{ marginRight: '15px' }}
+                size={60}
+                src="https://i.pravatar.cc/300"
+              />
+              <div>
+                <Title
+                  level={4}
+                  style={{
+                    color: 'rgba(255, 255, 255, 0.65)',
+                    marginBottom: '5px',
+                  }}
+                >
+                  {name}
+                </Title>
+                <Text style={{ color: 'rgba(255, 255, 255, 0.65)' }}>
+                  Xem trang cá nhân của bạn
+                </Text>
+              </div>
+            </div>
+          </Link>
+        </Menu.Item>
+        <Menu.Divider
+          style={{
+            backgroundColor: 'rgba(255,255,255,0.45)',
+            margin: '4px 12px',
+          }}
+        />
+        <Menu.Item key="feed" icon={<UserOutlined />}>
+          <Link href="/dashboard">Bảng tin</Link>
+        </Menu.Item>
+        <Menu.Item key="signout" icon={<LogoutOutlined />}>
+          Đăng xuất
+        </Menu.Item>
+      </Menu>
+    ),
+    [name, username]
   );
 
   return (
@@ -215,4 +243,4 @@ const HeaderPrimary = ({ name, bgHeader, username }) => {
   );
 };
 
-export default HeaderPrimary;
+export default memo(HeaderPrimary);

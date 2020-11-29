@@ -1,25 +1,34 @@
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
-import { getData } from '../utils/getData';
-import { notification } from 'antd';
+import React, { useEffect, useState, memo } from 'react';
 import Layout from '../components/layout';
 
-const Dashboard = ({ code, messange, name, username }) => {
-  console.log('dashboard render lai');
+import { useValidated } from '../hooks';
+
+const Dashboard = () => {
   const router = useRouter();
+  const { loggedOut, data } = useValidated();
+  const [name, setName] = useState(null);
+  const [username, setUsername] = useState(null);
+  console.log(loggedOut);
+  useEffect(() => {
+    if (loggedOut) {
+      router.replace('/login');
+    }
+  }, [loggedOut]);
 
   useEffect(() => {
-    router.prefetch('/');
-    if (code === 401) {
-      router.replace('/login');
-      notification['error']({
-        message: messange,
-      });
+    if (data) {
+      setName(data?.name);
+      setUsername(data?.username);
     }
-  }, []);
+  }, [data]);
+
+  useEffect(() => {
+    router.prefetch('/login');
+  });
 
   return (
-    <Layout name={name} username={username}>
+    <Layout name={name} username={username} title="Bảng điều khiển | ETraining">
       <div>
         <h1>Không có gì đâu mà vào.</h1>
         <h1>Không có gì đâu mà vào.</h1>
@@ -42,11 +51,4 @@ const Dashboard = ({ code, messange, name, username }) => {
   );
 };
 
-export const getServerSideProps = async (ctx) => {
-  const data = await getData(`${process.env.URL}api/auth`, ctx);
-  return {
-    props: data,
-  };
-};
-
-export default Dashboard;
+export default memo(Dashboard);

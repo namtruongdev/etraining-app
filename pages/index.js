@@ -1,23 +1,28 @@
 import Image from 'next/image';
-import { useContext } from 'react';
+import { useState, useEffect } from 'react';
 
-import LayoutWrapper from '../components/layout';
+import Layout from '../components/layout';
 import Banner from '../components/Home/Banner';
 import Slogan from '../components/Home/Slogan';
 import Why from '../components/Home/Why';
 import WhyLearn from '../components/Home/WhyLearn';
 import Rater from '../components/Home/Rater';
-import { AuthContext } from '../context/Auth';
+import { useValidated } from '../hooks';
 
 const Home = () => {
-  const { name, username } = useContext(AuthContext);
+  const { data } = useValidated();
+  const [name, setName] = useState(null);
+  const [username, setUsername] = useState(null);
+
+  useEffect(() => {
+    if (data) {
+      setUsername(data?.username);
+      setName(data?.name);
+    }
+  }, [data]);
 
   return (
-    <LayoutWrapper
-      name={name}
-      username={username}
-      title="Trang chủ | ETraining"
-    >
+    <Layout name={name} username={username} title="Trang chủ | ETraining">
       <Banner />
       <Slogan />
       <section className="divider">
@@ -42,7 +47,7 @@ const Home = () => {
           }
         `}
       </style>
-    </LayoutWrapper>
+    </Layout>
   );
 };
 

@@ -1,11 +1,8 @@
 import 'antd/dist/antd.css';
-import Auth from '../context/Auth';
 
 const MyApp = ({ Component, pageProps }) => (
   <>
-    <Auth>
-      <Component {...pageProps} />
-    </Auth>
+    <Component {...pageProps} />
 
     <style jsx global>
       {`

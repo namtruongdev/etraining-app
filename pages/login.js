@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import {
   Typography,
@@ -12,25 +12,28 @@ import {
   notification,
 } from 'antd';
 
-import { AuthContext } from '../context/Auth';
 import LayoutLetter from '../components/layoutLetter';
-import { useIsMounted } from '../hooks/index';
+import { useIsMounted, useValidated } from '../hooks/index';
 
 const { Title } = Typography;
 
 const Login = () => {
-  const _isMounted = useIsMounted();
   const router = useRouter();
-  const { code } = useContext(AuthContext);
-  if (code === 200) router.replace('/');
+  const { mutate, loggedIn } = useValidated();
+  const _isMounted = useIsMounted();
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (loggedIn) router.replace('/dashboard');
+  }, [loggedIn]);
+
   useEffect(() => {
     router.prefetch('/dashboard');
+    router.prefetch('/');
   }, []);
 
-  const onFinish = async (values) => {
+  const onFinish = useCallback(async (values) => {
     setLoading(true);
-
     const res = await fetch('/api/signin', {
       method: 'POST',
       headers: {
@@ -42,20 +45,25 @@ const Login = () => {
     const data = await res.json();
     if (_isMounted) {
       if (res.ok) {
-        if (data) setLoading(false);
-        notification['success']({
-          message: data.message,
-          duration: 1,
-        });
-        router.push('/dashboard');
+        if (data) {
+          setLoading(false);
+          notification['success']({
+            message: data.message,
+            duration: 1,
+          });
+        }
+        mutate();
+        // router.push('/dashboard');
       } else {
-        if (data) setLoading(false);
-        notification['error']({
-          message: data.message,
-        });
+        if (data) {
+          setLoading(false);
+          notification['error']({
+            message: data.message,
+          });
+        }
       }
     }
-  };
+  }, []);
 
   return (
     <Spin tip="Đang đăng nhập..." spinning={loading}>
