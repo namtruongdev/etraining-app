@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import React, { useMemo, useCallback, memo, useEffect, useState } from 'react';
 
 import { Layout, Button, Dropdown, Menu, Avatar, Typography } from 'antd';
-import cookie from 'js-cookie';
 import css from 'styled-jsx/css';
 
 import {
@@ -43,12 +42,11 @@ const HeaderPrimary = ({ bgHeader }) => {
   const _isMounted = useIsMounted();
 
   useEffect(() => {
-    console.log(loggedOut);
     if (data) {
       setName(data.name);
       setUsername(data.username);
     }
-  }, [data, loggedOut]);
+  }, [data]);
 
   useEffect(() => {
     router.prefetch(`/${username}`);
