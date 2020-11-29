@@ -55,17 +55,20 @@ const HeaderPrimary = ({ bgHeader }) => {
     router.prefetch('/');
   }, []);
 
-  const handleMenuClick = useCallback(async (e) => {
-    if (e.key === 'signout') {
-      const res = await fetch('/api/signout');
-      if (_isMounted) {
-        if (res.ok) {
-          mutate('/');
-          router.replace('/');
+  const handleMenuClick = useCallback(
+    async (e) => {
+      if (e.key === 'signout') {
+        const res = await fetch('/api/signout');
+        if (_isMounted) {
+          if (res.ok) {
+            mutate('/');
+            router.replace('/');
+          }
         }
       }
-    }
-  }, []);
+    },
+    [loggedOut]
+  );
 
   const menu = useMemo(
     () => (
