@@ -42,6 +42,7 @@ const HeaderPrimary = ({ bgHeader }) => {
   const _isMounted = useIsMounted();
 
   useEffect(() => {
+    console.log(data);
     if (data) {
       setName(data?.name);
       setUsername(data?.username);
