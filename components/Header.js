@@ -36,7 +36,7 @@ const { className, styles } = css.resolve`
 
 const HeaderPrimary = ({ bgHeader }) => {
   const router = useRouter();
-  const { mutate, data, loggedIn } = useValidated();
+  const { mutate, data } = useValidated();
   const [name, setName] = useState(null);
   const [username, setUsername] = useState(null);
   const _isMounted = useIsMounted();
@@ -53,20 +53,17 @@ const HeaderPrimary = ({ bgHeader }) => {
     router.prefetch('/');
   }, []);
 
-  const handleMenuClick = useCallback(
-    async (e) => {
-      if (e.key === 'signout') {
-        const res = await fetch('/api/signout');
-        if (_isMounted) {
-          if (res.ok) {
-            mutate(null);
-            router.replace('/');
-          }
+  const handleMenuClick = useCallback(async (e) => {
+    if (e.key === 'signout') {
+      const res = await fetch('/api/signout');
+      if (_isMounted) {
+        if (res.ok) {
+          mutate('/');
+          router.replace('/');
         }
       }
-    },
-    [loggedIn]
-  );
+    }
+  }, []);
 
   const menu = useMemo(
     () => (
