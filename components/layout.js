@@ -6,8 +6,6 @@ import { Layout } from 'antd';
 const Header = dynamic(() => import('./Header'));
 const Footer = dynamic(() => import('./Footer'));
 
-const { Content } = Layout;
-
 const LayoutWrapper = ({ children, title }) => {
   const [bgHeader, setBgHeader] = useState('rgba(0, 21, 41, 0.3)');
 
@@ -27,7 +25,7 @@ const LayoutWrapper = ({ children, title }) => {
       </Head>
       <Layout>
         <Header bgHeader={bgHeader} />
-        <Content>{children}</Content>
+        {children}
         <Footer />
       </Layout>
     </>

@@ -24,11 +24,11 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (loggedIn) router.replace('/dashboard');
+    if (loggedIn) router.replace('/feed');
   }, [loggedIn]);
 
   useEffect(() => {
-    router.prefetch('/dashboard');
+    router.prefetch('/feed');
     router.prefetch('/');
   }, []);
 

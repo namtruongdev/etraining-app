@@ -34,9 +34,9 @@ const { className, styles } = css.resolve`
   }
 `;
 
-const HeaderPrimary = ({ bgHeader }) => {
+const HeaderPrimary = ({ bgHeader, box }) => {
   const router = useRouter();
-  const { mutate, data, loggedOut } = useValidated();
+  const { mutate, data } = useValidated();
   const [name, setName] = useState(null);
   const [username, setUsername] = useState(null);
   const _isMounted = useIsMounted();
@@ -79,7 +79,7 @@ const HeaderPrimary = ({ bgHeader }) => {
               <Avatar
                 style={{ marginRight: '15px' }}
                 size={60}
-                src="https://i.pravatar.cc/300"
+                src="https://i.pravatar.cc/50"
               />
               <div>
                 <Title
@@ -105,7 +105,7 @@ const HeaderPrimary = ({ bgHeader }) => {
           }}
         />
         <Menu.Item key="feed" icon={<UserOutlined />}>
-          <Link href="/dashboard">Bảng tin</Link>
+          <Link href="/feed">Bảng tin</Link>
         </Menu.Item>
         <Menu.Item key="signout" icon={<LogoutOutlined />}>
           Đăng xuất
@@ -126,6 +126,7 @@ const HeaderPrimary = ({ bgHeader }) => {
         justifyContent: 'center',
         background: bgHeader,
         transition: 'all 2s ease',
+        boxShadow: box,
       }}
     >
       <div className="wrapper__nav">
@@ -186,7 +187,7 @@ const HeaderPrimary = ({ bgHeader }) => {
             >
               <Avatar
                 style={{
-                  background: 'url(https://i.pravatar.cc/300)',
+                  background: 'url(https://i.pravatar.cc/50)',
                   backgroundSize: 'cover',
                   verticalAlign: 'middle',
                   cursor: 'pointer',
