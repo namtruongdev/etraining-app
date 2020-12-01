@@ -19,7 +19,7 @@ const Rater = () => {
                   size={150}
                   src={
                     <Image
-                      src="/images/van-duong.jpg"
+                      src="/images/luong.jpg"
                       layout="intrinsic"
                       width={300}
                       height={300}
@@ -35,7 +35,7 @@ const Rater = () => {
                   ETraining việc học tiếng Anh của em đã trở lên thú vị hơn
                 </Paragraph>
                 <Text type="secondary">
-                  - Nguyễn Văn Dương @ sinh viên HUMG -
+                  - Khúc Anh Minh Lượng @ sinh viên HUST -
                 </Text>
               </div>
             </div>

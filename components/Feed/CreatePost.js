@@ -34,7 +34,11 @@ const CreatePost = () => {
           )}
         </div>
       </div>
-      <CreateModal visible={visible} handleCancel={handleCancel} />
+      <CreateModal
+        visible={visible}
+        handleCancel={handleCancel}
+        name={data?.name}
+      />
       <style jsx>
         {`
           .create-post {
@@ -43,6 +47,7 @@ const CreatePost = () => {
             margin: 0 auto;
             padding: 15px;
             border-radius: 10px;
+            transition: all 0.3s ease;
           }
           .create-post__input {
             display: flex;
@@ -69,6 +74,12 @@ const CreatePost = () => {
 
           .input span:hover {
             background: #4e4f50;
+          }
+
+          @media (min-width: 1200px) {
+            .create-post {
+              max-width: 680px;
+            }
           }
         `}
       </style>
