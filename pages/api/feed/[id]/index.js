@@ -13,6 +13,7 @@ export default async (req, res) => {
 
     switch (req.query.id) {
       case 'create':
+        res.json('ok');
         break;
       case 'update':
         break;
